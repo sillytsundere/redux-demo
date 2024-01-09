@@ -95,3 +95,58 @@ Steps to use middleware in redux:
 * pass in the middleware to the applyMiddleware method
 
 middleware will extend redux with additional functionality
+
+## Actions
+
+Synchronous Actions: as soon as an action was dispatched, the state was immediately updated
+
+Async Actions: asynchronous API calls to fetch data from an endpoint and use that data in your application
+
+My asynchronous app
+
+- fetches a list of users from an API end point and stores it in the redux store
+
+Define state, actions and reducers:
+
+State
+
+```
+state = {
+    loading: true,
+    data: [],
+    error: '',
+}
+```
+loading: display a loading spinner in your component
+data: list of users
+error: display error to the user
+
+Actions
+
+FETCH_USERS_REQUESTED-fetch list of users
+
+FETCH_USERS_SUCCEEDED-fetched successfully
+
+FETCH_USERS_FAILED-error when fetching data
+
+Reducers
+
+case: FETCH_USERS_REQUESTED
+    loading: true
+
+case: FETCH_USERS_SUCCEEDED
+    loading: false
+    users: data (from API)
+
+case: FETCH_USERS_FAILED
+    loading:false
+    error: error (from API)
+
+## Async Action creators
+
+axios 
+- requests to an API endpoint
+
+redux-thunk 
+- define async action creators
+- is essentially a middleware we will be applying to redux store
