@@ -78,3 +78,20 @@ in above scenario, the type is `CAKE_ORDERED`, so we reduce cake count by one an
 to update the state of your application, write pure reducers
 
 The app is subscribed to the store, but cannot directly update the state(in the store), so it dispatches an action that, once dispatched, is handled by a reducer which handles the action and updates the current state, once the state is updated it is passed on to the application because the app is subscribed to the store.
+
+## Middleware
+
+Middleware is the suggested way to extend redux with custom functionality. 
+
+It provides a third-party extension point between dispatching an action and the moment it reaches the reducer.
+
+Use middleware for logging, crash reporting, performing asynchronous tasks, etc.
+
+Will use redux Logger, which logs all information related to redux in your application
+
+Steps to use middleware in redux:
+* import applyMiddleware
+* pass applyMiddleware as an argument to createStore
+* pass in the middleware to the applyMiddleware method
+
+middleware will extend redux with additional functionality
