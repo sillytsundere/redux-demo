@@ -4,6 +4,7 @@ const creatStore = redux.createStore;
 //define a string constant that indicates the type of the action
 //creating a constant will help avoid spelling mistakes when using the action
 const CAKE_ORDERED = "CAKE_ORDERED";
+const CAKE_RESTOCKED = "CAKE_RESTOCKED";
 
 //define action
 //action is an object with a type property
@@ -16,13 +17,20 @@ function orderCake() {
     return {
         //action is defined and then returned in action creator
         type: CAKE_ORDERED,
-        quantity: 1
+        payload: 1
     }
     //use an action creator so that if you hav to change a property name or something else you dont have to go and change it in the action that you passed directly into the dispatch function, by using an action creator that returns the action and passing the action creator into the dispatch function you can just edit the action in one place
 }
 //action is object with type property, action creator is a function that returns an object
 // reducers specify how the app's state changes in response to actions sent to the store
 // actions only describe what happened but dont describe how the application's state changes
+
+function restockCake(qty = 1) {
+    return {
+        type: CAKE_RESTOCKED,
+        payload: qty
+    }
+}
 
 
 // state is represented by a single object
@@ -46,6 +54,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 numOfCakes: state.numOfCakes - 1
             }
+        case CAKE_RESTOCKED:
+            return {
+                ...state,
+                numOfCakes: state.numOfCakes + action.payload
+            }
         default:
             return state
     }
@@ -60,6 +73,7 @@ const unsubscribe = store.subscribe(() => console.log('Update state', store.getS
 store.dispatch(orderCake()); //this dispatches the action orderCake, which then is handled by the reducer that matches the type to the case and once the state is updated the listener above is called which then logs the updated state to the console
 store.dispatch(orderCake());
 store.dispatch(orderCake());
+store.dispatch(restockCake(3));
 
 unsubscribe();
 
