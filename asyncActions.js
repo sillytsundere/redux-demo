@@ -1,10 +1,16 @@
 //import redux
 const redux = require("redux");
 // import thunk middleware
-const thunkMiddleware = require("redux-thunk").default || require("redux-thunk");
+const thunkMiddleware = require("redux-thunk").thunk;
+//require("redux.thunk").default is outdated by this point 01/2023, but in youtube comments for this tutorial i am following i found someone said it works with .thunk
 const axios = require("axios");
 const createStore = redux.createStore;
 const applyMiddleware = redux.applyMiddleware;
+
+//install redux-logger
+const reduxLogger = require('redux-logger');
+//install logger middleware
+const logger = reduxLogger.createLogger();
 
 // define initial state
 // object with three properties
@@ -84,7 +90,7 @@ const fetchUsers = () => {
 };
 
 //create redux store
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 
 store.subscribe(() => {
   console.log(store.getState());
