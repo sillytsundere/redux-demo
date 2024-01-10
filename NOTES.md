@@ -150,3 +150,41 @@ axios
 redux-thunk 
 - define async action creators
 - is essentially a middleware we will be applying to redux store
+
+## Redux Concerns
+- Redux requires too much boilerplate code
+- for every state transition we define:
+    - Action
+    - Action object
+    - Action creator
+    - Switch statement in reducer
+- A lot of other packages have to be installed to work with redux
+    - redux-thunk (needed for async actions)
+    - Immer(handling nested state updates)
+    - Redux-devtools(help debug redux applciations)
+- there was a need to improve the developer experience for redux
+
+Resulted in creation of **Redux Toolkit** Library
+
+Redux Toolkit is the official, oninionated, batteries-included toolset for efficient Redux development
+- Abstract over setup process
+- Handle over most common use cases
+- Include some useful utilities
+
+**Slice is a redux convention, the entire application state is split into slices and managed individually
+
+* createSlice() under the hood uses the immer library
+* redux toolkit handles the state updation on my behalf
+
+### Basic how to use redux toolkit
+- create a feature slice using createSlice() function
+    - which generates the actions and reducers
+- perform direct mutations on state 
+    - totally okay, with immer being used under the hood
+- create the store using the configureStore() function
+    - and attach reducer
+- dispatch actions on the store using store.dispatch()
+- inspect the state using store.getState()
+- listen to changes using store.subscribe()
+
+*with redux toolkit the configure store function handles combining reducers together under the hood, so we dont have to do it like how its done in basic redux, with combineReducers()
