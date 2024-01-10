@@ -202,3 +202,6 @@ Redux Toolkit is the official, oninionated, batteries-included toolset for effic
 - listen to changes using store.subscribe()
 
 *with redux toolkit the configure store function handles combining reducers together under the hood, so we dont have to do it like how its done in basic redux, with combineReducers()
+
+*redux toolkit will code the action type for us
+ - under the hood redux toolkit will take the string from the slice name as the first part of the action type, and the key of each reducer function as the second part
