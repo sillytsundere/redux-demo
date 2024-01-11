@@ -19,7 +19,7 @@ const cakeSlice = createSlice({
         restocked: (state, action) => {
             state.numOfCakes += action.payload
         }
-    }
+    },
 })
 // createSlice will automatically generate action creators with same names as reducer functions i've written, ordered and restocked
 // also returns main reducer function i can provide to my redux store

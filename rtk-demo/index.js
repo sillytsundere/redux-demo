@@ -8,7 +8,7 @@ console.log('Initial State', store.getState());
 
 //subscribe to updates in the store
 const unsubscribe = store.subscribe(() => {
-    // console.log('Updated State', store.getState())
+    console.log('Updated State', store.getState())
     // added logger middleware, no longer need to console.log getState
 })
 
