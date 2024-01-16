@@ -1,9 +1,20 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 //import async thunk
 // const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
 import axios from "axios";
 
-const initialState = {
+type User = {
+  id: number
+  name: string
+}
+
+type InitialState = {
+  loading: boolean
+  users: User[]
+  error: string
+}
+
+const initialState: InitialState = {
   loading: false,
   users: [],
   error: "",
@@ -12,14 +23,15 @@ const initialState = {
 // Generated pending, fulfilled and rejected action types
 // createAsyncThunk accepts an action type as its first argument and a callback function as its second argument
 // second argument, callback function, will contain the async logic and return a promise
-export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
+export const fetchUsers = createAsyncThunk("user/fetchUsers", async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(
       "https://jsonplaceholder.typicode.com/users"
     );
     return response.data;
-  } catch (error) {
-    throw new Error(error.message);
+  } catch (error: any) {
+    // throw new Error(error.message);
+    return rejectWithValue(error.message || 'Something went wrong');
   }
   // return axios
   // .get("https://jsonplaceholder.typicode.com/users")
@@ -35,11 +47,12 @@ export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
 const userSlice = createSlice({
   name: "user",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+    builder.addCase(fetchUsers.fulfilled, (state, action: PayloadAction<User[]>) => {
       state.loading = false;
       state.users = action.payload;
       state.error = "";
@@ -47,7 +60,7 @@ const userSlice = createSlice({
     builder.addCase(fetchUsers.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something went wrong'
     });
   },
 });
