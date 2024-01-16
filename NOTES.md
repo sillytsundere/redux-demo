@@ -219,11 +219,11 @@ Extra Reducers are additional reducers apart from the reducer geenrated by creat
 
 # React-Redux
 
-*provide the store at the top of the component tree because the provider component uses react context under the hood and will provide the store to every component in your app
+\*provide the store at the top of the component tree because the provider component uses react context under the hood and will provide the store to every component in your app
 
-*to read data from the redux store in a react component we use the useSelector() hook
+\*to read data from the redux store in a react component we use the useSelector() hook
 -useSelector() hook is used to get hold of any state that is maintained in the redux store
 
 -useDispatch() hook used to dispatch an action with react redux
 
-*store only as much state as you need in the redux store, everything else can be local component state
+\*store only as much state as you need in the redux store, everything else can be local component state
