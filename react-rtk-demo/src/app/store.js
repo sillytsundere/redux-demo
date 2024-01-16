@@ -20,7 +20,7 @@ const store = configureStore({
     reducer: {
         cake: cakeReducer,
         icecream: icecreamReducer,
-        users: userReducer
+        user: userReducer
     },
     //specify middleware property, after reducer, in configure store to apply logger middleware
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
